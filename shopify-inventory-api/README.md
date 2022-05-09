@@ -18,6 +18,9 @@ Running the project is easy, just
 - Go to the inventoryapi class and run the Main function.
 This will start the application server on Apache Tomcat.
 
-- In your browser enter the URL <http://localhost:2019/h2-console/>. This will bring you to a screen that should  ![look like this](H2-database%20PM.png).
+- In your browser enter the URL <http://localhost:2019/h2-console/>. This will bring you to a screen that should look like this.  
+
+![look like this](H2-database%20PM.png)
+
 - Click on the connect button and you should be good to go to monitor the in memory DB.
 
