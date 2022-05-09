@@ -1,5 +1,6 @@
 package com.services;
 
+import com.exceptions.ResourceFoundException;
 import com.exceptions.ResourceNotFoundException;
 import com.models.Product;
 import com.repository.ProductsRepository;
@@ -77,7 +78,12 @@ public class ProductServiceImpl implements ProductService {
 
         if (product.getCount() > 0)
         {
-            currentProduct.setCount(product.getCount());
+            throw new ResourceFoundException("Product Count cannot be updated throught this process");
+        }
+
+        if (product.getDiscription() != null)
+        {
+            currentProduct.setDiscription(product.getDiscription());
         }
 
         return productsRepository.save(currentProduct);
