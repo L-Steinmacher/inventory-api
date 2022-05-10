@@ -19,4 +19,6 @@ public interface ProductService {
 
     Product addInventory(long id,
                          long count);
+
+    public void deleteAll();
 }
