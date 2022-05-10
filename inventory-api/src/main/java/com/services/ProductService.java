@@ -17,6 +17,6 @@ public interface ProductService {
             Product product,
             long id);
 
-    Product addInventory(long count,
-                         long id);
+    Product addInventory(long id,
+                         long count);
 }

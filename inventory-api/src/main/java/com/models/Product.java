@@ -6,26 +6,23 @@ import javax.persistence.*;
 @Table(name = "products")
 public class Product {
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    @Column(name = "procuctname", nullable = false)
+    @Column(name = "productname", nullable = false)
     private String productname;
 
     @Column(name = "count")
-    private Long count;
+    private long count;
 
-    @Column(name = "discription")
+    @Column(name = "discription", nullable = false)
     private String discription;
 
     public Product() {
     }
 
-    public Product(Long id, String productname, Long count, String discription) {
-        this.id = id;
+    public Product(String productname, String discription) {
         this.productname = productname;
-        this.count = count;
         this.discription = discription;
     }
 
@@ -33,7 +30,7 @@ public class Product {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -49,7 +46,7 @@ public class Product {
         return count;
     }
 
-    public void setCount(Long count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
