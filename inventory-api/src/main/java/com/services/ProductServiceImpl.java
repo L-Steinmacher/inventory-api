@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,10 +56,8 @@ public class ProductServiceImpl implements ProductService {
                     .orElseThrow(() -> new ResourceNotFoundException("Product id " + product.getId() + " not found"));
         }
 
-        newProduct.setProductname(product.getProductname()
-                .toLowerCase());
+        newProduct.setProductname(product.getProductname());
         newProduct.setDiscription(product.getDiscription());
-        newProduct.setCount(product.getCount());
 
         return productsRepository.save(newProduct);
     }
@@ -90,10 +87,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product addInventory(long count, long id) {
+    public Product addInventory( long id,long count) {
         Product currProduct = productsRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Product with id " + id + " not found!" ));
-
         currProduct.setCount(currProduct.getCount() + count);
         return currProduct;
     }
