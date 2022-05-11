@@ -4,12 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product
+    extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "productname", nullable = false)
+    @Column(name = "productname",
+            nullable = false,
+            unique = true)
     private String productname;
 
     @Column(name = "count")

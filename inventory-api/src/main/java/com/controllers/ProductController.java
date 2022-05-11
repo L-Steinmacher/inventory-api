@@ -90,9 +90,15 @@ public class ProductController {
             @RequestBody Product updatedProduct
     )
     {
-        updatedProduct.setId(productId);
-        productService.save(updatedProduct);
+        productService.update(updatedProduct, productId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/products")
+    public ResponseEntity<?> deleteTabel()
+    {
+        productService.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
