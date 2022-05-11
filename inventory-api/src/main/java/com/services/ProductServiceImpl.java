@@ -6,6 +6,7 @@ import com.models.Product;
 import com.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -32,7 +33,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product findProductById (long id)
     {
-        return productsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found!"));
+        return productsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + id + " not found!"));
     }
 
     @Transactional
@@ -92,5 +94,11 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(()-> new ResourceNotFoundException("Product with id " + id + " not found!" ));
         currProduct.setCount(currProduct.getCount() + count);
         return currProduct;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Override
+    public void deleteAll() {
+        productsRepository.deleteAll();
     }
 }
