@@ -4,12 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "products")
-public class Product {
+public class Product
+    extends Auditable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long productid;
 
-    @Column(name = "productname", nullable = false)
+    @Column(name = "productname",
+            nullable = false,
+            unique = true)
     private String productname;
 
     @Column(name = "count")
@@ -26,12 +29,12 @@ public class Product {
         this.discription = discription;
     }
 
-    public long getId() {
-        return id;
+    public long getProductid() {
+        return productid;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProductid(long productid) {
+        this.productid = productid;
     }
 
     public String getProductname() {

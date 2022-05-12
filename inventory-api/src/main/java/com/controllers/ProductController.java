@@ -60,7 +60,7 @@ public class ProductController {
         HttpHeaders responseHeader = new HttpHeaders();
         URI newProductURI = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{productId}")
-                .buildAndExpand(newProduct.getId())
+                .buildAndExpand(newProduct.getProductid())
                 .toUri();
         responseHeader.setLocation(newProductURI);
 
@@ -77,7 +77,7 @@ public class ProductController {
     )
     {
         Product p = productService.findProductById(productId);
-        productService.addInventory(p.getId(), count);
+        productService.addInventory(p.getProductid(), count);
 
         return new ResponseEntity<>(p, HttpStatus.ACCEPTED);
     }
@@ -90,9 +90,15 @@ public class ProductController {
             @RequestBody Product updatedProduct
     )
     {
-        updatedProduct.setId(productId);
-        productService.save(updatedProduct);
+        productService.update(updatedProduct, productId);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/products")
+    public ResponseEntity<?> deleteTabel()
+    {
+        productService.deleteAll();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

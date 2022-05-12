@@ -2,7 +2,6 @@ package com.services;
 
 import com.InvantoryApiTesting;
 import com.exceptions.ResourceNotFoundException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.models.Product;
 import com.repository.ProductsRepository;
@@ -143,7 +142,7 @@ public class ProductServiceImplTest {
         String p2NewDiscription = "wrecks stuff";
 
         Product p2 = new Product(p2NewName,p2NewDiscription);
-        p2.setId(2L);
+        p2.setProductid(2L);
 
         ObjectMapper objectMapper = new com.fasterxml.jackson.databind.ObjectMapper();
         Product p4 = objectMapper

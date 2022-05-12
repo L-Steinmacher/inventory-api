@@ -1,0 +1,46 @@
+package com.models;
+
+import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
+
+@Embeddable
+public class OrderDetailsId
+        implements Serializable {
+    private  long order;
+
+    private long product;
+
+    public OrderDetailsId() {
+    }
+
+    public long getOrder() {
+        return order;
+    }
+
+    public void setOrder(long order) {
+        this.order = order;
+    }
+
+    public long getProduct() {
+        return product;
+    }
+
+    public void setProduct(long product) {
+        this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetailsId that = (OrderDetailsId) o;
+        return product == that.product &&
+                order == that.order;
+    }
+
+    @Override
+    public int hashCode() {
+        return 37;
+    }
+}
