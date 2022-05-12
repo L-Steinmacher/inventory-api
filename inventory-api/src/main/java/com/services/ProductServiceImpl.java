@@ -52,10 +52,10 @@ public class ProductServiceImpl implements ProductService {
     {
         Product newProduct = new Product();
 
-        if (product.getId() != 0)
+        if (product.getProductid() != 0)
         {
-            productsRepository.findById(product.getId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Product id " + product.getId() + " not found"));
+            productsRepository.findById(product.getProductid())
+                    .orElseThrow(() -> new ResourceNotFoundException("Product id " + product.getProductid() + " not found"));
         }
 
         newProduct.setProductname(product.getProductname());

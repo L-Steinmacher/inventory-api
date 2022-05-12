@@ -60,7 +60,7 @@ public class ProductController {
         HttpHeaders responseHeader = new HttpHeaders();
         URI newProductURI = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{productId}")
-                .buildAndExpand(newProduct.getId())
+                .buildAndExpand(newProduct.getProductid())
                 .toUri();
         responseHeader.setLocation(newProductURI);
 
@@ -77,7 +77,7 @@ public class ProductController {
     )
     {
         Product p = productService.findProductById(productId);
-        productService.addInventory(p.getId(), count);
+        productService.addInventory(p.getProductid(), count);
 
         return new ResponseEntity<>(p, HttpStatus.ACCEPTED);
     }
