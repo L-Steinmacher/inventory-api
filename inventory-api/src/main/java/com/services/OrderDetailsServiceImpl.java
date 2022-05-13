@@ -11,10 +11,10 @@ import com.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service(value = "orderdetailService")
-public class OrderDetailsServiceImpl {
-    @Autowired
-    ProductService productServ;
+@Service(value = "orderdetailsService")
+public class OrderDetailsServiceImpl
+        implements OrderDetailsService
+{
 
     @Autowired
     ProductsRepository productsRepo;
@@ -25,24 +25,41 @@ public class OrderDetailsServiceImpl {
     @Autowired
     OrderRepository orderRepo;
 
-//    @Override
-    public OrderDetails addToOrder(long productid, long orderId)
+    @Override
+    public OrderDetails addToOrder(long productid, long orderid)
     {
-//        Product addProduct = productsRepo.findById(productid).orElseThrow(()-> new ResourceNotFoundException("Product with id " + productid + " not found!"));
-//
-//        Order currOrder = orderRepo.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order with id "+ orderId + " not found!"));
-//
-//        OrderDetails addOrderDetail = detailsRepository.findById(new OrderDetailsId(productid, ));
-//        return detailsRepository.save(addOrderDetail);
-        return new OrderDetails();
+        Product workingProduct = productsRepo.findById(productid)
+                .orElseThrow(()-> new ResourceNotFoundException("Product with id " + productid + " not found!"));
+
+        Order workingOrder = orderRepo.findById(orderid)
+                .orElseThrow(() -> new ResourceNotFoundException("Order with id "+ orderid + " not found!"));
+
+        OrderDetails workingOrderDetail = detailsRepository.findById(new OrderDetailsId(productid, orderid))
+                .orElse(new OrderDetails(workingProduct, workingOrder, 0));
+        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() + 1);
+        return detailsRepository.save(workingOrderDetail);
+
     }
 
-//    @Override
-    public OrderDetails removeFromOrder(long productid)
-    {
-//        OrderDetails workingOrderItem = detailsRepository.findById(new OrderDetailsId());
-//        if ( workingOrderItem.ge)
-//
-        return new OrderDetails();
+    @Override
+    public OrderDetails removeFromOrder(long productid, long orderid) {
+        Product workingProduct = productsRepo.findById(productid)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + productid + " not found!"));
+
+        Order workingOrder = orderRepo.findById(orderid)
+                .orElseThrow(() -> new ResourceNotFoundException("Order with id "+ orderid + " not found!"));
+
+        OrderDetails workingOrderDetail = detailsRepository.findById(new OrderDetailsId(productid, orderid))
+                .orElseThrow(() -> new ResourceNotFoundException("Product with id " + productid+ " not found on order!"));
+        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() - 1);
+
+        if (workingOrderDetail.getQuantity() <= 0)
+        {
+            detailsRepository.deleteById(new OrderDetailsId(productid,orderid));
+            return null;
+        }else {
+            return detailsRepository.save(workingOrderDetail);
+        }
     }
+
 }

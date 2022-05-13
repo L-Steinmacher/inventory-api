@@ -44,12 +44,6 @@ public class OrderServiceImpl
         newOrder.setCustomername(order.getCustomername().toLowerCase());
         newOrder.setComments(order.getComments());
         newOrder.getProducts().clear();
-        for (OrderDetails od: order.getProducts())
-        {
-            Product addProduct = productService.findProductById(od.getProduct().getProductid());
-            newOrder.getProducts()
-                    .add(new OrderDetails(addProduct, newOrder));
-        }
 
         return orderRepo.save(newOrder);
 

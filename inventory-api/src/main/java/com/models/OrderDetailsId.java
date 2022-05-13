@@ -2,7 +2,6 @@ package com.models;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Embeddable
 public class OrderDetailsId
@@ -12,6 +11,9 @@ public class OrderDetailsId
     private long product;
 
     public OrderDetailsId() {
+    }
+
+    public OrderDetailsId(long productid, long orderId) {
     }
 
     public long getOrder() {
