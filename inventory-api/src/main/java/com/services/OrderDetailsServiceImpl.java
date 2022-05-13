@@ -26,7 +26,7 @@ public class OrderDetailsServiceImpl
     OrderRepository orderRepo;
 
     @Override
-    public OrderDetails addToOrder(long productid, long orderid)
+    public OrderDetails addToOrder(long productid, long orderid, long quantity)
     {
         Product workingProduct = productsRepo.findById(productid)
                 .orElseThrow(()-> new ResourceNotFoundException("Product with id " + productid + " not found!"));
@@ -39,15 +39,15 @@ public class OrderDetailsServiceImpl
                 .orElse(new OrderDetails(workingProduct,
                         workingOrder,
                         0));
-        workingProduct.setCount(workingProduct.getCount()-1);
+        workingProduct.setCount(workingProduct.getCount()- quantity);
 
-        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() + 1);
+        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() + quantity);
         return detailsRepository.save(workingOrderDetail);
 
     }
 
     @Override
-    public OrderDetails removeFromOrder(long productid, long orderid) {
+    public OrderDetails removeFromOrder(long productid, long orderid, long quantity) {
         Product workingProduct = productsRepo.findById(productid)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + productid + " not found!"));
 
@@ -57,8 +57,8 @@ public class OrderDetailsServiceImpl
         OrderDetails workingOrderDetail = detailsRepository.findById(new OrderDetailsId(productid, orderid))
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + productid+ " not found on order!"));
 
-        workingProduct.setCount(workingProduct.getCount() + 1);
-        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() - 1);
+        workingProduct.setCount(workingProduct.getCount() + quantity);
+        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() - quantity);
 
         if (workingOrderDetail.getQuantity() <= 0)
         {
