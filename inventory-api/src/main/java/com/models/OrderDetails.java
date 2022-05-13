@@ -32,10 +32,10 @@ public class OrderDetails
     public OrderDetails() {
     }
 
-    public OrderDetails(Product product, Order order) {
+    public OrderDetails(Product product, Order order, long quantity) {
         this.product = product;
         this.order = order;
-
+        this.quantity = quantity;
     }
 
     public Product getProduct() {

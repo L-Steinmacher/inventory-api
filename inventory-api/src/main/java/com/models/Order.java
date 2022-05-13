@@ -17,7 +17,7 @@ public class Order
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long orderid;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String customername;
 
     private String comments;
@@ -30,6 +30,11 @@ public class Order
     private Set<OrderDetails> products = new HashSet<>();
 
     public Order() {
+    }
+
+    public Order(String customername, String comments) {
+        this.customername = customername;
+        this.comments = comments;
     }
 
     public long getOrderid() {
