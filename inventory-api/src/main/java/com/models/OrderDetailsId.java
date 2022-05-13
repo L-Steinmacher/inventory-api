@@ -13,7 +13,9 @@ public class OrderDetailsId
     public OrderDetailsId() {
     }
 
-    public OrderDetailsId(long productid, long orderId) {
+    public OrderDetailsId(long product, long order) {
+        this.order = order;
+        this.product = product;
     }
 
     public long getOrder() {

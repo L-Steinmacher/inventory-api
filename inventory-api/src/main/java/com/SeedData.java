@@ -62,7 +62,7 @@ public class SeedData implements CommandLineRunner {
 
         orderDetailsService.addToOrder(p1.getProductid(), o1.getOrderid());
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 2; i++)
         {
             orderDetailsService.addToOrder(p1.getProductid(), o2.getOrderid());
             orderDetailsService.addToOrder(p2.getProductid(), o2.getOrderid());
