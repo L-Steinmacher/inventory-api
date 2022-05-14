@@ -2,7 +2,11 @@ package com.controllers;
 
 import com.InvantoryApiTesting;
 import com.exceptions.ResourceNotFoundException;
+import com.models.Order;
+import com.models.OrderDetails;
 import com.models.Product;
+import com.services.OrderDetailsService;
+import com.services.OrderService;
 import com.services.ProductService;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.After;
@@ -20,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.get;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.number.OrderingComparison.lessThan;
@@ -39,12 +44,20 @@ public class OrderControllerIntegrationTestWithDB {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderDetailsService orderDetailsService;
+
     @Before
     public void setUp() throws Exception
     {
         RestAssuredMockMvc.webAppContextSetup(webApplicationContext);
 
         List<Product> productList = productService.findAll();
+        List<Order> orderList = orderService.findAll();
+        List<OrderDetails> = orderDetailsService.
 
         for (Product p : productList)
         {
@@ -59,31 +72,13 @@ public class OrderControllerIntegrationTestWithDB {
     }
 
     @Test
-    public void a_listAllProducts() {
+    public void a_listAllOrders() {
         given().when()
-                .get("/products/products")
+                .get("/orders/orders")
                 .then()
                 .statusCode(200)
                 .and()
-                .body(containsString("testhat"));
+                .body(containsString("will pick up whenever"));
     }
 
-    @Test
-    public void b_getProductById() {
-        given().when()
-                .get("/products/product/3")
-                .then()
-                .statusCode(200)
-                .and()
-                .body(containsString("testcellphone"));
-    }
-
-    @Test
-    public void bb_getProductByIdNotFound() {
-        long productId = 20;
-        given().when()
-                .get("/products/product/"+productId)
-                .then()
-                .statusCode(500);
-    }
 }
