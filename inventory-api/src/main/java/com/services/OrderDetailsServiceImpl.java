@@ -26,7 +26,7 @@ public class OrderDetailsServiceImpl
     OrderRepository orderRepo;
 
     @Override
-    public OrderDetails addToOrder(long productid, long orderid)
+    public OrderDetails addToOrder(long productid, long orderid, long quantity)
     {
         Product workingProduct = productsRepo.findById(productid)
                 .orElseThrow(()-> new ResourceNotFoundException("Product with id " + productid + " not found!"));
@@ -34,15 +34,20 @@ public class OrderDetailsServiceImpl
         Order workingOrder = orderRepo.findById(orderid)
                 .orElseThrow(() -> new ResourceNotFoundException("Order with id "+ orderid + " not found!"));
 
-        OrderDetails workingOrderDetail = detailsRepository.findById(new OrderDetailsId(productid, orderid))
-                .orElse(new OrderDetails(workingProduct, workingOrder, 0));
-        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() + 1);
+        OrderDetails workingOrderDetail = detailsRepository.findById(new OrderDetailsId(productid,
+                        orderid))
+                .orElse(new OrderDetails(workingProduct,
+                        workingOrder,
+                        0));
+        workingProduct.setCount(workingProduct.getCount()- quantity);
+
+        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() + quantity);
         return detailsRepository.save(workingOrderDetail);
 
     }
 
     @Override
-    public OrderDetails removeFromOrder(long productid, long orderid) {
+    public OrderDetails removeFromOrder(long productid, long orderid, long quantity) {
         Product workingProduct = productsRepo.findById(productid)
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + productid + " not found!"));
 
@@ -51,7 +56,9 @@ public class OrderDetailsServiceImpl
 
         OrderDetails workingOrderDetail = detailsRepository.findById(new OrderDetailsId(productid, orderid))
                 .orElseThrow(() -> new ResourceNotFoundException("Product with id " + productid+ " not found on order!"));
-        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() - 1);
+
+        workingProduct.setCount(workingProduct.getCount() + quantity);
+        workingOrderDetail.setQuantity(workingOrderDetail.getQuantity() - quantity);
 
         if (workingOrderDetail.getQuantity() <= 0)
         {

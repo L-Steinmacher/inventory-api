@@ -54,19 +54,17 @@ public class SeedData implements CommandLineRunner {
         productService.addInventory(2, 200);
         productService.addInventory(3,300);
 
-        Order o1 = new Order("sammy","will pick up whenever");
-        Order o2 = new Order("douglas","fedex to address");
+        Order o1 = new Order(42,"will pick up whenever");
+        Order o2 = new Order(43,"fedex to address");
 
         o1 = orderService.save(o1);
         o2 = orderService.save(o2);
 
-        orderDetailsService.addToOrder(p1.getProductid(), o1.getOrderid());
+        orderDetailsService.addToOrder(p1.getProductid(), o1.getOrderid(), 10);
 
-        for (int i = 0; i < 4; i++)
-        {
-            orderDetailsService.addToOrder(p1.getProductid(), o2.getOrderid());
-            orderDetailsService.addToOrder(p2.getProductid(), o2.getOrderid());
-        }
+        orderDetailsService.addToOrder(p2.getProductid(), o2.getOrderid(),20);
+        orderDetailsService.addToOrder(p3.getProductid(), o2.getOrderid(),30);
+
 
     }
 

@@ -17,8 +17,8 @@ public class Order
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long orderid;
 
-    @Column(nullable = false, unique = true)
-    private String customername;
+    @Column(nullable = false, unique = false)
+    private long customerid;
 
     private String comments;
 
@@ -32,8 +32,8 @@ public class Order
     public Order() {
     }
 
-    public Order(String customername, String comments) {
-        this.customername = customername;
+    public Order(long customerid, String comments) {
+        this.customerid = customerid;
         this.comments = comments;
     }
 
@@ -53,12 +53,12 @@ public class Order
         this.products = products;
     }
 
-    public String getCustomername() {
-        return customername;
+    public long getCustomerid() {
+        return customerid;
     }
 
-    public void setCustomername(String customername) {
-        this.customername = customername;
+    public void setCustomerid(long customerid) {
+        this.customerid = customerid;
     }
 
     public String getComments() {

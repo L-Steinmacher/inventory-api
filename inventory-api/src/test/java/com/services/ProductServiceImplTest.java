@@ -16,26 +16,28 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = InvantoryApiTesting.class,
-    properties = {"command.line.runner.enabled=false"})
+@SpringBootTest(classes = InvantoryApiTesting.class, properties = {"command.line.runner.enabled=false"})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductServiceImplTest {
+
     @Autowired
     ProductService productService;
 
     @MockBean
     ProductsRepository productsRepo;
 
-    ArrayList productList = new ArrayList<Product>();
+    List<Product> productList = new ArrayList<>();
     @Before
     public void setUp() throws Exception
     {
@@ -59,13 +61,21 @@ public class ProductServiceImplTest {
         p1.setCount(100);
         p2.setCount(200);
         p3.setCount(300);
-
+        p1.setProductid(1l);
+        p2.setProductid(2l);
+        p3.setProductid(3l);
 
         productList.add(p1);
         productList.add(p2);
         productList.add(p3);
 
         MockitoAnnotations.initMocks(this);
+
+        for (Product p : productList)
+        {
+            System.out.println("Product id: "+ p.getProductid()+ "   product name: " + p.getProductname()+ "   count: "+p.getCount());
+        }
+
     }
 
     @After
@@ -73,10 +83,15 @@ public class ProductServiceImplTest {
     {}
 
     @Test
+    public void whenContextLoads_thenServiceISNotNull() {
+        assertNotNull(productService.findAll());
+    }
+
+    @Test
     public void a_findProductById()
     {
         Mockito.when(productsRepo.findById(1L))
-                .thenReturn(Optional.of((Product) productList.get(0)));
+                        .thenReturn(Optional.of(productList.get(0)));
         assertEquals("hat", productService.findProductById(1).getProductname());
         assertEquals(100, productService.findProductById(1).getCount());
         assertNotEquals("clipboard", productService.findProductById(1).getProductname());
@@ -158,17 +173,19 @@ public class ProductServiceImplTest {
 
         assertNotNull(addProduct);
         assertEquals(p2.getProductname(), addProduct.getProductname());
+
     }
 
     @Test(expected = ResourceNotFoundException.class)
     public void dd_notUpdateIdNotFound() {
+
     }
 
     @Test
     public void e_addInventory() {
         long addInv = 300;
-        Mockito.when(productsRepo.findById(1l))
-                .thenReturn(Optional.of((Product)productList.get(0)));
+//        Mockito.when(productsRepo.findById(1l))
+//                .thenReturn(Optional.of((Product)productList.get(0)));
         assertEquals(100, productService.findProductById(1).getCount());
         assertEquals(400, productService.addInventory(1, addInv).getCount());
     }

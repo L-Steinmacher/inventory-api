@@ -41,7 +41,7 @@ public class OrderServiceImpl
                     .orElseThrow(() -> new ResourceNotFoundException("Order with id " + order.getOrderid() + " not found!"));
         }
 
-        newOrder.setCustomername(order.getCustomername().toLowerCase());
+        newOrder.setCustomerid(order.getCustomerid());
         newOrder.setComments(order.getComments());
         newOrder.getProducts().clear();
 
