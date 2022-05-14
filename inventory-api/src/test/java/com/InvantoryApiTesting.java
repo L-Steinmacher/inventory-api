@@ -2,13 +2,15 @@ package com;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.context.annotation.ImportResource;
+
 
 @SpringBootApplication
+@ImportResource({"classpath*:application-context.xml"})
 public class InvantoryApiTesting {
     public static void main(String[] args)
     {
-        SpringApplication.run(inventoryapi.class,
+        SpringApplication.run(InvantoryApiTesting.class,
                 args);
     }
 }
