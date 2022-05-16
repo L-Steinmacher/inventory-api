@@ -26,13 +26,13 @@ public class SeedData
     implements CommandLineRunner {
 
     @Autowired
-    private ProductService productService;
+    ProductService productService;
 
     @Autowired
-    private OrderService orderService;
+    OrderService orderService;
 
     @Autowired
-    private OrderDetailsService orderDetailsService;
+    OrderDetailsService orderDetailsService;
 
     @Transactional
     @Override
@@ -53,12 +53,19 @@ public class SeedData
                 "testcellphone",
                 "it looks up cat pictures"
         );
+
+        Product p4 = new Product(
+                "testwatch",
+                "tells time "
+        );
+        p4.setCount(400);
         p1.setCount(100);
         p2.setCount(200);
         p3.setCount(300);
         p1 = productService.save(p1);
         p2 = productService.save(p2);
         p3 = productService.save(p3);
+        p4 = productService.save(p4);
 
         productService.addInventory(1, 100);
         productService.addInventory(2, 200);

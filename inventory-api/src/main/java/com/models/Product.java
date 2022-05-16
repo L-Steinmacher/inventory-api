@@ -18,7 +18,7 @@ public class Product
     @Column(name = "count")
     private long count;
 
-    @Column(name = "discription", nullable = false)
+    @Column(name = "discription")
     private String discription;
 
     public Product() {
