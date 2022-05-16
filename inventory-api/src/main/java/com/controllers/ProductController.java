@@ -1,6 +1,7 @@
 package com.controllers;
 
 import com.models.Product;
+import com.repository.OrderDetailsRepository;
 import com.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,7 +20,10 @@ import java.util.List;
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
+
+    @Autowired
+    private OrderDetailsRepository orderDetailsRepository;
 
     @GetMapping(value = "/products",
         produces = "application/json")
@@ -40,9 +44,9 @@ public class ProductController {
 
     @DeleteMapping(value = "/product/{productId}",
         produces = "application/json")
-    public ResponseEntity<?> deleteProductById (
-            @PathVariable Long productId)
+    public ResponseEntity<?> deleteProductById (@PathVariable Long productId)
     {
+
         productService.delete(productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

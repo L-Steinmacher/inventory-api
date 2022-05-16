@@ -57,7 +57,6 @@ public class OrderControllerIntegrationTestWithDB {
 
         List<Product> productList = productService.findAll();
         List<Order> orderList = orderService.findAll();
-        List<OrderDetails> = orderDetailsService.
 
         for (Product p : productList)
         {

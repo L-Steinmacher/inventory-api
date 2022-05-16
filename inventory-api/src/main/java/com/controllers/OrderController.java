@@ -21,7 +21,7 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
-    OrderDetailsService orderDetailsService;
+    private OrderDetailsService orderDetailsService;
 
     @GetMapping(value = "/orders",
             produces = "application/json")
