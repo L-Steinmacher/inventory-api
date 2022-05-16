@@ -31,7 +31,15 @@ public class OrderController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-//
+    @GetMapping(value = "order/{orderid}",produces = "application/json")
+    public ResponseEntity<?> getOrderById (@PathVariable
+                                           Long orderid)
+    {
+        Order o = orderService.findOrderById(orderid);
+        return new ResponseEntity<>(o, HttpStatus.OK);
+    }
+
+
     @PostMapping(value = "/customer/")
     public ResponseEntity<?> addItemsToOrder(
             @RequestBody OrderMinimum order
@@ -46,6 +54,7 @@ public class OrderController {
             System.out.println(item);
             orderDetailsService.addToOrder(item.getProductid(), newOrder.getOrderid(), item.getQuantity());
         }
+
 
         return new ResponseEntity<>(newOrder, HttpStatus.OK);
     }

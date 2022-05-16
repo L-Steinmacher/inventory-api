@@ -138,15 +138,14 @@ public class ProductControllerIntegrationTestWithDB {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
-                .andExpect(status().isCreated())
-                ;
+                .andExpect(status().isCreated());
     }
 
     @Test
     public void e_addInventory() throws Exception
     {
         long aProduct = 1;
-        long quantity = 200;
+        long quantity = 200; // This is the number added to count.  for id=1 original count is 90. id=2 OC = 180. id=3 OC = 270
 
         given().when()
                 .put("/products/product/"+aProduct+"/"+quantity)
