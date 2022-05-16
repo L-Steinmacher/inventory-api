@@ -47,14 +47,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(long id)
     {
-        OrderDetails od = orderDetailsRepository.findByProductId(id);
-        if (od != null) {
+//        OrderDetails od = orderDetailsRepository.findByProductId(id);
+//        if (od != null) {
             productsRepository.findById(id)
                     .orElseThrow(()-> new ResourceNotFoundException("Product with id " + id + " not found!"));
             productsRepository.deleteById(id);
-        } else {
-            throw new ResourceConflictException("Cannot delete from database item "+ id+ "in use in orders!");
-        }
+//        } else {
+//            throw new ResourceConflictException("Cannot delete from database item "+ id+ "in use in orders!");
+//        }
 
     }
 
