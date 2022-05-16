@@ -63,6 +63,10 @@ public class OrderControllerIntegrationTestWithDB {
             System.out.println("Product id: "+ p.getProductid()+ "   product name: " + p.getProductname()+ "   count: "+p.getCount());
         }
 
+        for (Order o : orderList) {
+            System.out.println("Order id: " + o.getOrderid()+ " Customerid: "+o.getCustomerid());
+        }
+
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
@@ -78,6 +82,18 @@ public class OrderControllerIntegrationTestWithDB {
                 .statusCode(200)
                 .and()
                 .body(containsString("will pick up whenever"));
+    }
+
+    @Test
+    public void b_getOrderById() {
+        String returnJson = "{\"orderid\":5,\"customerid\":42,\"comments\":\"will pick up whenever\",\"products\":[{\"product\":{\"productid\":1,\"productname\":\"testhat\",\"count\":90,\"discription\" \"put it on ya head\"},\"quantity\":10}]}";
+
+        given().when()
+                .get("/orders/order/5")
+                .then()
+                .statusCode(200)
+                .and()
+                .body(containsString(returnJson));
     }
 
 }

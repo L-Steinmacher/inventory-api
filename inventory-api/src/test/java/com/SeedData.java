@@ -5,6 +5,7 @@ import com.models.Product;
 import com.services.OrderDetailsService;
 import com.services.OrderService;
 import com.services.ProductService;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,10 +27,10 @@ public class SeedData
     implements CommandLineRunner {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
     @Autowired
-    OrderService orderService;
+    private OrderService orderService;
 
     @Autowired
     OrderDetailsService orderDetailsService;
@@ -58,10 +59,7 @@ public class SeedData
                 "testwatch",
                 "tells time "
         );
-        p4.setCount(400);
-        p1.setCount(100);
-        p2.setCount(200);
-        p3.setCount(300);
+
         p1 = productService.save(p1);
         p2 = productService.save(p2);
         p3 = productService.save(p3);
@@ -70,16 +68,17 @@ public class SeedData
         productService.addInventory(1, 100);
         productService.addInventory(2, 200);
         productService.addInventory(3,300);
+        productService.addInventory(4,400);
 
         List<Product> productList = productService.findAll();
         System.out.println("##################################");
-        System.out.println(productList+ "    " + productList.size());
+
 
         for (Product p : productList)
         {
             System.out.println("Product id: "+ p.getProductid()+ "   prouct name: " + p.getProductname()+ "   count: "+p.getCount());
         }
-        System.out.println("##################################");
+
 
         Order o1 = new Order(42,"will pick up whenever");
         Order o2 = new Order(43,"fedex to address");
@@ -91,5 +90,11 @@ public class SeedData
 
         orderDetailsService.addToOrder(p2.getProductid(), o2.getOrderid(),20);
         orderDetailsService.addToOrder(p3.getProductid(), o2.getOrderid(),30);
+
+        List<Order> orderList = orderService.findAll();
+
+
+
+        System.out.println("##################################");
     }
 }
