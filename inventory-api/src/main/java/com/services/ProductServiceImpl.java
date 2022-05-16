@@ -1,8 +1,11 @@
 package com.services;
 
+import com.exceptions.ResourceConflictException;
 import com.exceptions.ResourceFoundException;
 import com.exceptions.ResourceNotFoundException;
+import com.models.OrderDetails;
 import com.models.Product;
+import com.repository.OrderDetailsRepository;
 import com.repository.ProductsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +21,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductsRepository productsRepository;
+
+    @Autowired
+    OrderDetailsRepository orderDetailsRepository;
 
     @Override
     public List<Product> findAll()
@@ -41,9 +47,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void delete(long id)
     {
-        productsRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Product with id " + id + " not found!"));
-        productsRepository.deleteById(id);
+        OrderDetails od = orderDetailsRepository.findByProductId(id);
+        if (od != null) {
+            productsRepository.findById(id)
+                    .orElseThrow(()-> new ResourceNotFoundException("Product with id " + id + " not found!"));
+            productsRepository.deleteById(id);
+        } else {
+            throw new ResourceConflictException("Cannot delete from database item "+ id+ "in use in orders!");
+        }
+
     }
 
     @Transactional

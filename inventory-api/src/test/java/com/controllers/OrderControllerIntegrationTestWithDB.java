@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -86,7 +87,7 @@ public class OrderControllerIntegrationTestWithDB {
 
     @Test
     public void b_getOrderById() {
-        String returnJson = "{\"orderid\":5,\"customerid\":42,\"comments\":\"will pick up whenever\",\"products\":[{\"product\":{\"productid\":1,\"productname\":\"testhat\",\"count\":90,\"discription\" \"put it on ya head\"},\"quantity\":10}]}";
+        String returnJson = "{\"orderid\":5,\"customerid\":42,\"comments\":\"will pick up whenever\",\"products\":[{\"product\":{\"productid\":1,\"productname\":\"testhat\",\"count\":90,\"discription\":\"put it on ya head\"},\"quantity\":10}]}";
 
         given().when()
                 .get("/orders/order/5")
@@ -94,6 +95,38 @@ public class OrderControllerIntegrationTestWithDB {
                 .statusCode(200)
                 .and()
                 .body(containsString(returnJson));
+    }
+
+    @Test
+    public void b_getOrderByIdNotFound() throws Exception {
+        String exeptionParam = "Not Found";
+        given().when()
+                .get("/orders/order/20")
+                .then()
+                .statusCode(404);
+    }
+
+    @Test
+    public void addItemsToOrder () throws Exception {
+        String jsonInput = "{\n" +
+                "    \"customerid\": 42,\n" +
+                "    \"comments\": \"Hello, World2\",\n" +
+                "    \"items\": [\n" +
+                "        {\n" +
+                "            \"productid\": 1,\n" +
+                "            \"quantity\": 10\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"productid\": 2,\n" +
+                "            \"quantity\": 40\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/orders/customer/")
+                .content(jsonInput)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 }

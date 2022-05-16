@@ -69,4 +69,8 @@ public class OrderDetailsServiceImpl
         }
     }
 
+//    @Override
+//    public OrderDetails findByProductId(long productid) {
+//        detailsRepository.findById(productid)
+//    }
 }

@@ -55,7 +55,6 @@ public class OrderController {
             orderDetailsService.addToOrder(item.getProductid(), newOrder.getOrderid(), item.getQuantity());
         }
 
-
         return new ResponseEntity<>(newOrder, HttpStatus.OK);
     }
 }
