@@ -24,9 +24,9 @@ Running the project is easy, just:
 This will start the application server on Apache Tomcat.
 
 - Alternitivly, navigate to the root of the folder and in your command line and  run: 
-- ```
-- mvn spring-boot🇧🇳
-- ```
+ ```
+ mvn spring-boot🇧🇳
+ ```
 
 - In your browser enter the URL <http://localhost:2019/h2-console/>. This will bring you to a screen that should look like this.  
 
