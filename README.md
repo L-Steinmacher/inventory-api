@@ -7,8 +7,26 @@ This app was built for use in the application process and I will guide you throu
 | Get All Products      | Gets all products from table      |  /products/products | N/A |
 | Get Product By Id   | Gets a product by it's unique id       |  /products/product/{productId} |  replace productId with unique id |
 | Post Save Product     | Saves the product object into the product Table     |  /products/product | Request Body <pre>{<br>  "productname": "TEST TEST TEST TEST",<br>  "discription": "TEST TEST TEST TEST"<br>}</pre> |
-| Put Add Product Inventory   | Adds quantity to the product "count" |  /products/product/{productId}/{quantity} |  replace productId with unique id, quantity with number to add to inventory |
-| Put Update   | Updates complete product object in table  |  /products/product/{productId}   |  replace productId with unique id, Request Body <pre>{<br>  "productname": "TEST TEST TEST TEST",<br>  "discription": "TEST TEST TEST TEST"<br>}</pre> |
+| Put Add Product Inventory   | Adds quantity to the product "count" |  /products/product/{productId}/{quantity} |  Replace productId with unique id, quantity with number to add to inventory |
+| Put Update   | Updates complete product object in table  |  /products/product/{productId}   |  Replace productId with unique id, Request Body <pre>{<br>  "productname": "TEST TEST TEST TEST",<br>  "discription": "TEST TEST TEST TEST"<br>}</pre> |
+| Delete Product By Id   | Deletes a product by it's unique id       |  /products/product/{productId} |  Replace productId with unique id Note: As of May 16/ 2022 This endpoint may throw an error if you attempt to delete a product that is in an order. ResourceConflictException has been written but not implemented. |
+| Get All Orders/Shipments     | Gets all Orders from table      |  /orders/orders | N/A |
+| Get Orders/Shipments By Id   | Gets order from table by unique Id      |  /orders/order/{orderId} | Replace orderId with unique id in Order table |
+| Post Save Order     | Given a complete order object, saves it to the order table     |  /orders/customer | Request Body <pre>{
+    "customerid": 42,
+    "comments": "Hello, World2",
+    "items": [
+        {
+            "productid": 1,
+            "quantity": 10
+        },
+        {
+            "productid": 2,
+            "quantity": 40
+        }
+    ]
+} </pre> |
+
 
 
 ## What is the H2 database you ask?  
