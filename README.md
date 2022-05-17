@@ -15,7 +15,9 @@ What is the H2 console you ask?
 
 ## Replit 
 This app is deployed on replit to test and spin up the server [here](https://replit.com/@Steinml82/inventory-api#src/main/resources/application.properties).
-Just hit the run button and wait a few minuits for the api to boot up.  Once it has finished you should see 
+Just hit the run button and wait a few minuits for the api to boot up.  Once it has finished you should see ![image of replit once deployed]() 
+
+## OR
 
 ## Setting up this project on Localhost
 Running the project is easy, just:
@@ -25,7 +27,7 @@ This will start the application server on Apache Tomcat.
 
 - Alternitivly, navigate to the root of the folder and in your command line and  run: 
  ```
- mvn spring-boot🇧🇳
+ mvn spring-boot
  ```
 
 - In your browser enter the URL <http://localhost:2019/h2-console/>. This will bring you to a screen that should look like this.  
