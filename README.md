@@ -7,7 +7,8 @@ This app was built for use in the application process and I will guide you throu
 | Get All Products      | Gets all products from table      |  /products/products | N/A |
 | Get Product By Id   | Gets a product by it's unique id       |  /products/product/{productId} |  replace productId with unique id |
 | Post Save Product     | Saves the product object into the product Table     |  /products/product | Request Body <pre>{<br>  "productname": "TEST TEST TEST TEST",<br>  "discription": "TEST TEST TEST TEST"<br>}</pre> |
-| Put Add Product Inventory   | Adds quantity to the product "count" |  /products/product/{productId}/{quantity |  replace productId with unique id, quantity with number to add to inventory |
+| Put Add Product Inventory   | Adds quantity to the product "count" |  /products/product/{productId}/{quantity} |  replace productId with unique id, quantity with number to add to inventory |
+| Put Update   | Updates complete product object in table  |  /products/product/{productId}   |  replace productId with unique id, Request Body <pre>{<br>  "productname": "TEST TEST TEST TEST",<br>  "discription": "TEST TEST TEST TEST"<br>}</pre> |
 
 
 ## What is the H2 database you ask?  
