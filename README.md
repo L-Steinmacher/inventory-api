@@ -31,7 +31,7 @@ This app was built for use in the application process and I will guide you throu
 
 ## Replit 
 This app is deployed on replit to test and spin up the server [here](https://replit.com/@Steinml82/inventory-api#src/main/resources/application.properties).
-Just hit the run button and wait a few minuits for the api to boot up.  Once it has finished you should see ![image of replit once deployed]() 
+Just hit the run button and wait a few minuits for the api to boot up.  Once it has finished you should see ![image of replit once deployed](replit-screenshot.png) 
 
 A thing to note is the Http status 404. There is no HTML 
 
