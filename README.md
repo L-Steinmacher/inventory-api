@@ -13,6 +13,7 @@ This app was built for use in the application process and I will guide you throu
 | Get All Orders/Shipments     | Gets all Orders from table      |  /orders/orders | N/A |
 | Get Orders/Shipments By Id   | Gets order from table by unique Id      |  /orders/order/{orderId} | Replace orderId with unique id in Order table |
 | Post Save Order     | Given a complete order object, saves it to the order table     |  /orders/customer | Request Body <pre>{<br>    "customerid": {customerId},<br>    "comments": "Hello, World2",<br>    "items": [<br>        {<br>            "productid": 1,<br>            "quantity": 10<br>        }<br>    ]<br>} </pre> Replace customerId with any int. Customer object/table has not been implamented yes and is only there as context of what WOULD be needed in a shipment/order |
+| Delete Orders/Shipments By Id   | Deletes Order from table by unique Id      |  /orders/order/{orderId} | Replace orderId with unique id in Order table |
 
 
 
