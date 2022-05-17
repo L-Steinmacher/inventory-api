@@ -3,7 +3,7 @@ This app was built for use in the application process and I will guide you throu
 
 ## Endpoints
 | Crud operation     | Description |  Endpoint   | Request Body(if applicible) |
-| :---        |    :----:   |          ---: |
+| :---        |    :----:   |   :----:   |          ---: |
 | Get All Products      | Gets all products from table      |  /products/products | null |
 | Get Product By Id   | Gets a product by it's unique id       |  /products/product/1    |  null |
 
