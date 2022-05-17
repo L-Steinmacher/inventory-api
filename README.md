@@ -6,12 +6,7 @@ This app was built for use in the application process and I will guide you throu
 | :---        |    :----:   |   :----:   |          ---: |
 | Get All Products      | Gets all products from table      |  /products/products | N/A |
 | Get Product By Id   | Gets a product by it's unique id       |  /products/product/{productId}   |  replace productId with unique id |
-| Post Save Product     | Saves the product object into the product Table     |  /products/product |
-```{
-    "productname": "TEST TEST TEST TEST",
-    "discription": "TEST TEST TEST TEST"
-}``` 
-|
+| Post Save Product     | Saves the product object into the product Table     |  /products/product | <pre>{<br>    "productname": "TEST TEST TEST TEST",<br>    "discription": "TEST TEST TEST TEST"<br>}</pre>   |
 
 
 ## What is the H2 database you ask?  
