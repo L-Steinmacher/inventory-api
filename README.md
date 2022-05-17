@@ -17,7 +17,9 @@ What is the H2 console you ask?
 This app is deployed on replit to test and spin up the server [here](https://replit.com/@Steinml82/inventory-api#src/main/resources/application.properties).
 Just hit the run button and wait a few minuits for the api to boot up.  Once it has finished you should see ![image of replit once deployed]() 
 
-## OR
+The api is now running at [https://inventory-api.steinml82.repl.co/](https://inventory-api.steinml82.repl.co/) and is ready to test with postman or any other api testing tool that use!
+
+#### OR
 
 ## Setting up this project on Localhost
 Running the project is easy, just:
