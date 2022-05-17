@@ -2,7 +2,7 @@
 This app was built for use in the application process and I will guide you through the process of setting up this app and running the Crud commands.  
 
 ## Endpoints
-| Crud operation     | Description |  Endpoint   | Notes |
+| Crud operation     | Description |  Endpoint   | Notes/Example |
 | :---        |    :----:   |   :----:   |          ---: |
 | Get All Products      | Gets all products from table      |  /products/products | N/A |
 | Get Product By Id   | Gets a product by it's unique id       |  /products/product/{productId} |  replace productId with unique id |
@@ -12,7 +12,7 @@ This app was built for use in the application process and I will guide you throu
 | Delete Product By Id   | Deletes a product by it's unique id       |  /products/product/{productId} |  Replace productId with unique id Note: As of May 16/ 2022 This endpoint may throw an error if you attempt to delete a product that is in an order. ResourceConflictException has been written but not implemented. |
 | Get All Orders/Shipments     | Gets all Orders from table      |  /orders/orders | N/A |
 | Get Orders/Shipments By Id   | Gets order from table by unique Id      |  /orders/order/{orderId} | Replace orderId with unique id in Order table |
-| Post Save Order     | Given a complete order object, saves it to the order table     |  /orders/customer | Request Body <pre>{<br>    "customerid": 42,<br>    "comments": "Hello, World2",<br>    "items": [<br>        {<br>            "productid": 1,<br>            "quantity": 10<br>        },<br>        {<br>            "productid": 2,<br>            "quantity": 40<br>        }<br>    ]<br>} </pre> |
+| Post Save Order     | Given a complete order object, saves it to the order table     |  /orders/customer | Request Body <pre>{<br>    "customerid": {customerId},<br>    "comments": "Hello, World2",<br>    "items": [<br>        {<br>            "productid": 1,<br>            "quantity": 10<br>        }<br>    ]<br>} </pre> |
 
 
 
